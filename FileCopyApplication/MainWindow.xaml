@@ -1,0 +1,114 @@
+﻿<Window x:Class="FileCopyApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        Title="File Copy Application" Height="450" Width="600" WindowStartupLocation="CenterScreen"  ResizeMode="CanMinimize">    
+    <StackPanel>
+        <StackPanel Background="Gray" Height="250">
+            <DataGrid Name="sourceDataGrid"
+                      Height="248"
+                      FontSize="16" FontWeight="SemiBold"
+                      AutoGenerateColumns="False"  
+                      ColumnHeaderHeight="28"
+                      CanUserResizeColumns="False"
+                      CanUserResizeRows="False"    
+                      CanUserSortColumns="False"
+                      CanUserAddRows="False">                                                                                                                                                                                                                                                                                                         
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn Header="Source Path" Width="*">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <DockPanel LastChildFill="True" >                                    
+                                    <Button x:Name="subtractBtn" 
+                                            Content="-" 
+                                            Width="32" 
+                                            DockPanel.Dock="Right"
+                                            FontWeight="Bold" Margin="1" 
+                                            Background="#FF3E3E3E" 
+                                            Foreground="White"
+                                            Click="removeLine_Click"/>
+                                    <Button x:Name="plusBtn" 
+                                            Content="+" 
+                                            Width="32"
+                                            DockPanel.Dock="Right"                                            
+                                            FontWeight="Bold" Margin="1" 
+                                            Background="#FF3E3E3E" 
+                                            Foreground="White"
+                                            Click="addLine_Click"/>
+                                    <Button x:Name="SourcebrowseBtn" 
+                                            Content="..." 
+                                            Width="32" 
+                                            FontWeight="Bold" Margin="1" 
+                                            Background="#FF3E3E3E" 
+                                            Foreground="White"
+                                            DockPanel.Dock="Right"
+                                            Click="browseSource_Click"/>
+                                    <TextBox x:Name="sourcePath" 
+                                             Text="{Binding SourcePath,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                                             LostFocus="checkFilePath_LostFocus"
+                                             DockPanel.Dock="Left"
+                                             Width="Auto"
+                                             FontSize="14"/>
+                                </DockPanel>                                
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>                    
+                </DataGrid.Columns>                
+            </DataGrid>
+        </StackPanel>
+        
+        <StackPanel>
+            <WrapPanel>
+                <TextBlock Text="Destination Path :" 
+                           FontSize="16" 
+                           Height="28" 
+                           FontWeight="SemiBold" 
+                           Margin="10,10,5,10"/>
+                <TextBox x:Name="destinationPath" 
+                         Text=""
+                         LostFocus="checkDirectoryPath_LostFocus"
+                         Height="28"  
+                         FontSize="14" 
+                         FontWeight="SemiBold" 
+                         Margin="5,10,5,10" 
+                         Width="395"/>
+                <Button x:Name="destinationBrowseBtn"
+                        Click="browseDestination_Click"
+                        Content="..." 
+                        Width="32" Height="28" 
+                        FontSize="16" 
+                        FontWeight="Bold" 
+                        Background="#FF3E3E3E" 
+                        Foreground="White"/>
+            </WrapPanel>
+            
+            <WrapPanel>
+                <TextBlock Text="OverWrite :" 
+                           FontSize="16" Height="28" 
+                           FontWeight="SemiBold" Margin="55,10,10,10"/>
+                <RadioButton x:Name="yesRadioBtn"                             
+                             Content="YES" FontSize="16" 
+                             Height="28" FontWeight="SemiBold" 
+                             Margin="10" GroupName="OverWrite" 
+                             VerticalAlignment="Center" 
+                             Foreground="Green"
+                             />
+                <RadioButton x:Name="noRadioBtn"                             
+                             Content="NO" 
+                             FontSize="16" Height="28" 
+                             FontWeight="SemiBold" 
+                             Margin="10" GroupName="OverWrite" 
+                             VerticalAlignment="Center"
+                             IsChecked="True"
+                             Foreground="Red"/>
+            </WrapPanel>
+            
+            <Button x:Name="copyBtn" Content="COPY" 
+                    FontWeight="Bold" Margin="10" 
+                    Width="60" Height="28" 
+                    HorizontalAlignment="Center"
+                    Background="Green" Foreground="White" 
+                    Click="copy_Click"/>
+        </StackPanel>
+    </StackPanel>
+</Window>
